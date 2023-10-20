@@ -1,5 +1,7 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+![Threads-view](https://github.com/ayush09316/Threads_clone/assets/111636248/41b4a02c-b090-49ab-a956-59b61e03d72e)
+
 ## Getting Started
 
 First, run the development server:
@@ -10,6 +12,7 @@ npm run dev
 yarn dev
 # or
 pnpm dev
+
 # or
 bun dev
 ```
