@@ -47,14 +47,18 @@ export async function fetchPosts(pageNumber = 1, pageSize = 20) {
 }
 
 interface Params {
-  text: string,
-  author: string,
-  communityId: string | null,
-  path: string,
+  text: string;
+  author: string;
+  communityId: string | null;
+  path: string;
 }
 
-export async function createThread({ text, author, communityId, path }: Params
-) {
+export async function createThread({
+  text,
+  author,
+  communityId,
+  path,
+}: Params) {
   try {
     connectToDB();
 
@@ -87,7 +91,7 @@ export async function createThread({ text, author, communityId, path }: Params
   }
 }
 
-async function fetchAllChildThreads(threadId: string): Promise<any[]> {
+export async function fetchAllChildThreads(threadId: string): Promise<any[]> {
   const childThreads = await Thread.find({ parentId: threadId });
 
   const descendantThreads = [];
@@ -232,7 +236,64 @@ export async function addCommentToThread(
 
     revalidatePath(path);
   } catch (err) {
-    console.error("Error while adding comment:", err);
     throw new Error("Unable to add comment");
+  }
+}
+
+export async function likePost(threadId: string, userId: string) {
+  try {
+    connectToDB();
+
+    const thread = await Thread.findById(threadId);
+
+    if (!thread) {
+      throw new Error("Thread not found");
+    }
+
+    const currentLikeStatus = thread.likes?.get(userId) || false;
+
+    const updatedLikes = {
+      ...(thread.likes?.toObject() || {}),
+      [userId]: !currentLikeStatus,
+    };
+
+    thread.likes?.set(userId, !currentLikeStatus);
+
+    // Save the updated thread to the database
+    const updatedThread = await thread.save();
+
+    // Update the thread with the new likes
+    const likesCount = Array.from(updatedThread.likes?.values() || []).filter(
+      (liked) => liked
+    ).length;
+    // Return the updated likes count
+
+    return likesCount;
+  } catch (error: any) {
+    throw new Error(`Failed to like thread: ${error.message}`);
+  }
+}
+
+export async function rePost(threadId: string, userId: string){
+  try {
+    connectToDB();
+
+    const originalThread = await Thread.findById(threadId);
+
+    if (!originalThread) {
+      throw new Error("Thread not found");
+    }
+
+    const repostedThread = new Thread({
+      text: originalThread.text,
+      author: originalThread.author,
+     
+    });
+
+    // Save the reposted thread
+    const savedRepost = await repostedThread.save();
+
+  } catch (error:any) {
+    throw new Error(`Failed to like thread: ${error.message}`);
   }
 }
