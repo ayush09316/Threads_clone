@@ -26,9 +26,7 @@ const LikePost = ({ currentUserId,threadId,likes }: LikeProps) => {
         // You may need to store the like count in the component state
         setLikeCount( updateLikeCount);
         setIsLike((prev)=> !prev);
-        console.log(updateLikeCount);
         
-
       } catch (error:any) {
         console.error('Error liking post:', error.message);
       }
