@@ -14,7 +14,6 @@ async function Home({
 }) {
   const user = await currentUser();
   if (!user) return null;
-
   const userInfo = await fetchUser(user.id);
   if (!userInfo?.onboarded) redirect("/onboarding");
 
@@ -43,6 +42,7 @@ async function Home({
                 community={post.community}
                 createdAt={post.createdAt}
                 comments={post.children}
+                likes={post.likes}
               />
             ))}
           </>
