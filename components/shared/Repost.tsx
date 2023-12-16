@@ -9,28 +9,42 @@ interface RepostProp {
 }
 
 const Repost = ({threadId,userId}:RepostProp) => {
-    const [isReposted, setIsReposted] = useState<boolean>(false);
-    const handleRepost = async () => {
-        try {
-          console.log("userId before repostThread:", threadId);
-          await repostThread(threadId, userId);
-          setIsReposted(true);
-        } catch (error:any) {
-          console.error('Error reposting thread:', error.message);
-        }
-      };
+  const [isReposted, setIsReposted] = useState<boolean>(false);
+  const [showNotification, setShowNotification] = useState<boolean>(false);
+
+  const handleRepost = async () => {
+    try {
+      await repostThread(threadId, userId);
+      setIsReposted(true);
+      setShowNotification(true);
+      setTimeout(() => {
+        setShowNotification(false);
+      }, 900); 
+
+    } catch (error: any) {
+      console.error('Error reposting thread:', error.message);
+    }
+  };
+
   return (
-    
+    <>
+    {showNotification? (
+      <div className="notification">
+        <span role="img" aria-label="check-mark">
+          ✅
+        </span>
+      </div>
+    ):(
       <Image
-        src="/assets/repost.svg"
-        alt="repost"
-        width={24}
-        height={24}
-        className={`cursor-pointer object-contain ${isReposted && 'opacity-50'}`}
-        onClick={handleRepost}
-        
-      />
-        
+      src={`/assets/repost.svg`}
+      alt="repost"
+      width={24}
+      height={24}
+      className={`cursor-pointer object-contain ${isReposted ? 'opacity-50' : ''}`}
+      onClick={isReposted ? undefined : handleRepost}
+    />
+    )}
+  </>
   );
 };
 

@@ -40,7 +40,7 @@ const SharePost = ({ threadId }: SharePostProps) => {
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="bg-blackA6 data-[state=open]:animate-overlayShow fixed inset-0" />
-        <Dialog.Content className="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-dark-3 p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none">
+        <Dialog.Content className="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-dark-3 p-[25px]  focus:outline-none">
           <Dialog.Title className="text-mauve12 mb-4 absolute top-2   text-[17px] text-white font-semibold">
             Share Thread
           </Dialog.Title>
@@ -126,7 +126,7 @@ const SharePost = ({ threadId }: SharePostProps) => {
                 <Image src={"/assets/link.svg"} alt={"link"} width={20} height={20} className="rotate-[135deg]"/>
               <input type="text" title="link" value={`https://localhost:3000/${threadId}`} className="border-none outline-none w-[100%] h-[100%] overflow-hidden bg-black text-white ml-2"/>
               <Dialog.Close asChild>
-                <button className="bg-green4 bg-white text-green11  focus:shadow-green7 inline-flex h-[30px] items-center justify-center rounded-[5px] px-[15px] font-semibold leading-none focus:shadow-[0_0_0_2px] focus:outline-none">
+                <button className="bg-green4 bg-white text-green11  focus:shadow-green7 inline-flex h-[30px] items-center justify-center rounded-[5px] px-[15px] font-semibold leading-none focus:shadow-[0_0_0_2px] focus:outline-none ">
                   Copy
                 </button>
                 </Dialog.Close>
