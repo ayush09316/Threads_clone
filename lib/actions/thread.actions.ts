@@ -5,8 +5,9 @@ import { connectToDB } from "../mongoose";
 import User from "../models/user.model";
 import Thread from "../models/thread.model";
 import Community from "../models/community.model";
+import mongoose from "mongoose";
 
-export async function fetchPosts(pageNumber = 1, pageSize = 20) {
+export async function fetchPosts(pageNumber = 1, pageSize = 10) {
   connectToDB();
 
   // Calculate the number of posts to skip based on the page number and page size.
@@ -274,26 +275,30 @@ export async function likePost(threadId: string, userId: string) {
   }
 }
 
-export async function rePost(threadId: string, userId: string){
+export async function repostThread(threadId: string, userId: string){
   try {
     connectToDB();
-
-    const originalThread = await Thread.findById(threadId);
-
-    if (!originalThread) {
-      throw new Error("Thread not found");
+    const thread = await Thread.findById(threadId);
+    
+    if (!thread) {
+      throw new Error('Thread not found');
     }
 
-    const repostedThread = new Thread({
-      text: originalThread.text,
-      author: originalThread.author,
-     
-    });
+     // Check if the user has already reposted
+     const alreadyReposted = thread.reposts.some((repost: { users: string }) =>
+     repost.users === userId
+    );
 
-    // Save the reposted thread
-    const savedRepost = await repostedThread.save();
+   if (alreadyReposted) {
+     throw new Error('Thread already reposted by the user');
+   }
+   // Add the repost to the thread, ensuring the user is stored as ObjectId
+   thread.reposts.push({ users:userId, timestamp: new Date() });
+
+   // Save the updated thread
+   await thread.save();
 
   } catch (error:any) {
-    throw new Error(`Failed to like thread: ${error.message}`);
+    throw new Error(`Failed to repost thread: ${error.message}`);
   }
 }

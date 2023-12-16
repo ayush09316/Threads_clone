@@ -27,6 +27,18 @@ const threadSchema = new mongoose.Schema({
       ref: "Thread",
     },
   ],
+  reposts: [
+    {
+      users: {
+        type: String,
+        required:true, 
+      },
+      timestamp: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
   likes:{
     type:Map,
     of:Boolean,

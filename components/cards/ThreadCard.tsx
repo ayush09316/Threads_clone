@@ -27,7 +27,7 @@ interface Props {
       image: string;
     };
   }[];
-  likes: Record<string, boolean>;
+  likes:  Map<string, boolean>;
   isComment?: boolean;
 }
 
@@ -43,6 +43,7 @@ function ThreadCard({
   likes,
   isComment,
 }: Props) {
+  const likesObject = Object.fromEntries(likes);
   return (
     <article
       className={`flex w-full flex-col rounded-xl ${
@@ -78,7 +79,7 @@ function ThreadCard({
                 <LikePost
                   currentUserId={currentUserId}
                   threadId={id.toString()}
-                  likes={likes}
+                  likes={likesObject}
                 />
 
                 <Link href={`/thread/${id}`}>
@@ -91,9 +92,9 @@ function ThreadCard({
                   />
                 </Link>
 
-                <Repost />
+                <Repost threadId={id.toString()} userId={currentUserId} />
 
-                <SharePost />
+                <SharePost threadId={id.toString()} />
               </div>
 
               {isComment && comments.length > 0 && (
