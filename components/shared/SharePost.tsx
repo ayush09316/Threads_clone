@@ -25,6 +25,9 @@ interface SharePostProps {
 }
 
 const SharePost = ({ threadId }: SharePostProps) => {
+  const handleClick=()=>{
+    navigator.clipboard.writeText(`${window.location.protocol}//${window.location.host}/thread/${threadId}`);
+  }
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
@@ -52,20 +55,20 @@ const SharePost = ({ threadId }: SharePostProps) => {
 
           <div className="flex flex-row gap-4">
             <WhatsappShareButton
-              url={"https://github.com/next-share"}
+              url={`${window.location.protocol}//${window.location.host}/thread/${threadId}`}
               title={
-                "next-share is a social share buttons for your next React apps."
+                "Found this gem and couldn't resist sharing it with you – enjoy the vibes!"
               }
-              separator=":: "
+              separator=" :: "
             >
               <WhatsappIcon size={35} round />
             </WhatsappShareButton>
 
-            <LinkedinShareButton url={"https://github.com/next-share"}>
+            <LinkedinShareButton url={`${window.location.protocol}//${window.location.host}/thread/${threadId}`}>
               <LinkedinIcon size={35} round />
             </LinkedinShareButton>
             <TwitterShareButton
-              url={"https://github.com/next-share"}
+              url={`${window.location.protocol}//${window.location.host}/thread/${threadId}`}
               title={
                 "Found this gem and couldn't resist sharing it with you – enjoy the vibes!"
               }
@@ -73,27 +76,27 @@ const SharePost = ({ threadId }: SharePostProps) => {
               <TwitterIcon size={35} round />
             </TwitterShareButton>
             <TelegramShareButton
-              url={"https://github.com/next-share"}
+              url={`${window.location.protocol}//${window.location.host}/thread/${threadId}`}
               title={
-                "next-share is a social share buttons for your next React apps."
+                "Found this gem and couldn't resist sharing it with you – enjoy the vibes!"
               }
             >
               <TelegramIcon size={35} round />
             </TelegramShareButton>
 
             <RedditShareButton
-              url={"https://github.com/next-share"}
+              url={`${window.location.protocol}//${window.location.host}/thread/${threadId}`}
               title={
-                "next-share is a social share buttons for your next React apps."
+                "Found this gem and couldn't resist sharing it with you – enjoy the vibes!"
               }
             >
               <RedditIcon size={35} round />
             </RedditShareButton>
 
             <FacebookShareButton
-              url={"https://github.com/next-share"}
+              url={`${window.location.protocol}//${window.location.host}/thread/${threadId}`}
               quote={
-                "next-share is a social share buttons for your next React apps."
+                "Found this gem and couldn't resist sharing it with you – enjoy the vibes!"
               }
               hashtag={"#nextshare"}
             >
@@ -101,18 +104,18 @@ const SharePost = ({ threadId }: SharePostProps) => {
             </FacebookShareButton>
 
             <LineShareButton
-              url={"https://github.com/next-share"}
+              url={`${window.location.protocol}//${window.location.host}/thread/${threadId}`}
               title={
-                "next-share is a social share buttons for your next React apps."
+                "Found this gem and couldn't resist sharing it with you – enjoy the vibes!"
               }
             >
               <LineIcon size={35} round />
             </LineShareButton>
 
             <PinterestShareButton
-              url={"https://github.com/next-share"}
+              url={`${window.location.protocol}//${window.location.host}/thread/${threadId}`}
               media={
-                "next-share is a social share buttons for your next React apps."
+                "Found this gem and couldn't resist sharing it with you – enjoy the vibes!"
               }
             >
               <PinterestIcon size={35} round />
@@ -122,25 +125,35 @@ const SharePost = ({ threadId }: SharePostProps) => {
             Or copy link
           </Dialog.Description>
           <div className="mt-[10px] flex justify-end">
-              <div className="w-[100%] h-[45px] border-2 rounded-lg flex items-center justify-end p-2">
-                <Image src={"/assets/link.svg"} alt={"link"} width={20} height={20} className="rotate-[135deg]"/>
-              <input type="text" title="link" value={`https://localhost:3000/${threadId}`} className="border-none outline-none w-[100%] h-[100%] overflow-hidden bg-black text-white ml-2"/>
+            <div className="w-[100%] h-[45px] border-2 rounded-lg flex items-center justify-end p-2">
+              <Image
+                src={"/assets/link.svg"}
+                alt={"link"}
+                width={20}
+                height={20}
+                className="rotate-[135deg]"
+              />
+              <input
+                type="text"
+                title="link"
+                value={`https://localhost:3000/thread/${threadId}`}
+                className="border-none outline-none w-[100%] h-[100%] overflow-hidden bg-black text-white ml-2"
+              />
               <Dialog.Close asChild>
-                <button className="bg-green4 bg-white text-green11  focus:shadow-green7 inline-flex h-[30px] items-center justify-center rounded-[5px] px-[15px] font-semibold leading-none focus:shadow-[0_0_0_2px] focus:outline-none ">
+                <button className="bg-green4 bg-white text-green11  focus:shadow-green7 inline-flex h-[30px] items-center justify-center rounded-[5px] px-[15px] font-semibold leading-none focus:shadow-[0_0_0_2px] focus:outline-none " onClick={handleClick}>
                   Copy
                 </button>
-                </Dialog.Close>
-              </div>
-            
+              </Dialog.Close>
+            </div>
           </div>
           <Dialog.Close asChild>
-          <button
-            className="bg-slate-800 hover:bg-slate-600 focus:shadow-white absolute top-[10px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none items-center justify-center rounded-full focus:shadow-[0_0_0_2px] focus:outline-none"
-            aria-label="Close"
-          >
-            <p className="text-white font-semibold">x</p>
-          </button>
-        </Dialog.Close>
+            <button
+              className="bg-slate-800 hover:bg-slate-600 focus:shadow-white absolute top-[10px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none items-center justify-center rounded-full focus:shadow-[0_0_0_2px] focus:outline-none"
+              aria-label="Close"
+            >
+              <p className="text-white font-semibold">x</p>
+            </button>
+          </Dialog.Close>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
