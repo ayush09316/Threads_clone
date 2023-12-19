@@ -136,7 +136,7 @@ const SharePost = ({ threadId }: SharePostProps) => {
               <input
                 type="text"
                 title="link"
-                value={`https://localhost:3000/thread/${threadId}`}
+                value={`${window.location.protocol}//${window.location.host}/thread/${threadId}`}
                 className="border-none outline-none w-[100%] h-[100%] overflow-hidden bg-black text-white ml-2"
               />
               <Dialog.Close asChild>
