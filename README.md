@@ -1,8 +1,8 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-![Threads-view](https://github.com/ayush09316/Threads_clone/assets/111636248/41b4a02c-b090-49ab-a956-59b61e03d72e)
 
-## Getting Started
+## Getting Started![Screenshot 2023-12-22 175231](https://github.com/ayush09316/ZenWeave/assets/111636248/2d825dbc-f67e-4fab-9956-a07a06343dc0)
+
 
 First, run the development server:
 
