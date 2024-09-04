@@ -28,7 +28,7 @@
     <img src="https://github.com/user-attachments/assets/1f2d112d-0069-4b38-a8a0-9ff3ff70eb56" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Best-README-Template</h3>
+  <h3 align="center">ZENWEAVE-README</h3>
 
   <p align="center">
     An awesome README for the project!
